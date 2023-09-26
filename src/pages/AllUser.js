@@ -34,7 +34,7 @@ const AllUser = () => {
       },
     },
     {
-      field: 'phone',
+      field: 'phone', 
       headerName: 'Phone',
       width: 150,
       renderCell: (params) => {
@@ -121,7 +121,7 @@ const AllUser = () => {
 
   useEffect(() => {
     axios
-      .get('https://cpdbackend.onrender.com/users')
+      .get('http://localhost:8000/api/allUsers')
       .then((res) => {
         const filterData = res.data.filter((user) => user.role !== 'admin' && user.role !== 'management');
         setTableData(filterData);

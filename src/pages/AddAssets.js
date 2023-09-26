@@ -6,7 +6,7 @@ import { Button, Dialog, DialogTitle, DialogContent, DialogActions, TextField } 
 import './index.css';
 
 const AddAssets = () => {
-  const [courseName, setCourseName] = useState('');
+  const [textReq, setTextReq] = useState('');
   const [file, setFile] = useState(null);
   const [alert, setAlert] = useState(null);
   const [CourseDetails, setCourseDetails] = useState(null);
@@ -48,7 +48,7 @@ const AddAssets = () => {
   });
 
   const handleOpen = (row) => {
-    setCourseDetails(row);
+    setTextReq(row);
     console.log(row);
     setOpen(true);
   };
@@ -58,24 +58,52 @@ const AddAssets = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('courseName', courseName);
+    formData.append('courseName', textReq);
 
-    const baseUrl = 'https://cpdbackend.onrender.com/admin/addcourse';
+    const baseUrl = 'http://localhost:8000/dropDown/select';
+
+    // try {
+    //   await axios.post(baseUrl, formData,{
+    //     headers: {
+    //       'Content-Type': 'multipart/form-data', // Set the content type for file upload
+    //     },
+    //   });
+    //   setAlert(<Alert severity="success"> Asset Successfully Uploaded</Alert>);
+    //   // clearAlertAfterDelay();
+    //   setTextReq('');
+    //   setFile(null);
+    // } catch (error) {
+    //   console.log(error);
+    //   setAlert(<Alert severity="error">{error.message}</Alert>);
+    //   // clearAlertAfterDelay();
+    // }
+
+    event.preventDefault(); // Prevent the form from submitting the traditional way
 
     try {
-      await axios.post(baseUrl, formData);
-      setAlert(<Alert severity="success"> Asset Successfully Uploaded</Alert>);
-      clearAlertAfterDelay();
-      setCourseName('');
-      setFile(null);
+      if (textReq.trim() === '') {
+        throw new Error('Text Fields Cannot be empty.');
+      }
+
+      // Make an HTTP POST request to your backend API
+      const response = await axios.post(baseUrl, { textReq });
+
+      // Check if the request was successful
+      if (response.status === 201) {
+        // Clear the input field and any previous errors
+        setTextReq('');
+        setFile(null);
+
+        // setError(null);
+        // You can also update your todo list state here if needed.
+      }
     } catch (error) {
-      console.log(error);
+            // console.log(error);
       setAlert(<Alert severity="error">{error.message}</Alert>);
-      clearAlertAfterDelay();
     }
   };
   const clearAlertAfterDelay = () => {
@@ -190,8 +218,8 @@ const AddAssets = () => {
                   id="courseName"
                   className="login-form-input"
                   type="text"
-                  value={courseName}
-                  onChange={(e) => setCourseName(e.target.value)}
+                  value={textReq}
+                  onChange={(e) => setTextReq(e.target.value)}
                 />
               </div>
 
