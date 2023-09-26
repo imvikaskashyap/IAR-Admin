@@ -10,96 +10,22 @@ import { filter } from 'lodash';
 const AllUser = () => {
   const [userRole, setUserRole] = useState('');
 
-  useEffect(() => {
-    const user = localStorage.getItem('user');
-    const userParse = JSON.parse(user);
-    const role = userParse?.role || '';
-    setUserRole(role);
-  }, []);
-
   const columns = [
     { field: 'userId', headerName: 'ID' },
-    { field: 'name', headerName: 'Name', width: 100 },
+    { field: 'orgName', headerName: 'Org. Name', width: 100 },
     {
-      field: 'email',
-      headerName: 'Email',
+      field: 'compLocation',
+      headerName: 'Comp. Location',
       width: 150,
-      renderCell: (params) => {
-        // Replace this with your actual userRole state
-
-        if (userRole === 'management') {
-          return 'xxxxxxxxxx';
-        }
-        return params.value;
-      },
     },
     {
-      field: 'phone', 
+      field: 'phone',
       headerName: 'Phone',
       width: 150,
-      renderCell: (params) => {
-        // const userRole = 'management'; // Replace this with your actual userRole state
-
-        if (userRole === 'management') {
-          return 'xxxxxxxxxx';
-        }
-        return params.value;
-      },
     },
     { field: 'status', headerName: 'Status', width: 150 },
     { field: 'isActive', headerName: 'IsActive', width: 150 },
     { field: 'createdAt', headerName: 'createdAt', width: 250 },
-    // {
-    //   field: 'action',
-    //   headerName: 'Action',
-    //   width: 150,
-    //   renderCell: (params) => (
-    //     <>
-    //       <button
-    //         onClick={() => handleReject(params.row)}
-    //         style={{
-    //           border: 'none',
-    //           padding: '5px 10px',
-    //           marginRight: '5px',
-    //           fontSize: '14px',
-    //           cursor: 'pointer',
-    //           backgroundColor: 'red',
-    //           color: 'white',
-    //         }}
-    //       >
-    //         X
-    //       </button>
-    //       <button
-    //         onClick={() => handleApproved(params.row)}
-    //         style={{
-    //           border: 'none',
-    //           padding: '5px 10px',
-    //           marginRight: '5px',
-    //           fontSize: '14px',
-    //           cursor: 'pointer',
-    //           backgroundColor: 'green',
-    //           color: 'white',
-    //         }}
-    //       >
-    //         ✔
-    //       </button>
-    //       {/* <button
-    //         onClick={() => handleClickOpen(params.row)}
-    //         style={{
-    //           border: 'none',
-    //           // padding: '5px 10px',
-    //           marginRight: '5px',
-    //           fontSize: '19px',
-    //           cursor: 'pointer',
-    //           backgroundColor: '#4169E1',
-    //           color: 'white',
-    //         }}
-    //       >
-    //         ✉️
-    //       </button> */}
-    //     </>
-    //   ),
-    // },
   ];
 
   const [paginationModel, setPaginationModel] = React.useState({
@@ -121,52 +47,13 @@ const AllUser = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:8000/api/allUsers')
+      .get('https://onegrcirabackend.onrender.com/api/allUsers')
       .then((res) => {
-        const filterData = res.data.filter((user) => user.role !== 'admin' && user.role !== 'management');
-        setTableData(filterData);
-        console.log(filterData);
+        setTableData(res.data);
+        console.log(res.data);
       })
       .catch((err) => console.log(err));
   }, []);
-
-  // console.log(tableData);
-
-  const handleReject = (row) => {
-    const userId = row.userId;
-    console.log(userId);
-    const confirmed = window.confirm('Are you sure you want to Reject this User?');
-    if (confirmed) {
-      axios
-        .delete(`https://cpdbackend.onrender.com/users/${userId}`)
-        .then((res) => {
-          const updatedUsers = tableData.filter((u) => u.userId !== row.userId);
-          setShow(true);
-          setMessage('User has been Reject');
-          setTableData(updatedUsers); // update tableData state
-          setDeletedRows(updatedUsers);
-        })
-        .catch((err) => console.log(err));
-    }
-  };
-
-  const handleApproved = (row) => {
-    const userId = row.userId;
-    console.log(userId);
-    const confirmed = window.confirm('Are you sure you want to Approve this User?');
-    if (confirmed) {
-      axios
-        .put(`https://cpdbackend.onrender.com/users/approve/${userId}`)
-        .then((res) => {
-          const updatedUsers = tableData.filter((u) => u.userId !== row.userId);
-          setShow(true);
-          setMessage('User has been Approved');
-          setTableData(updatedUsers); // update tableData state
-          setApprovedRows(updatedUsers);
-        })
-        .catch((err) => console.log(err));
-    }
-  };
 
   const handleClickOpen = (row) => {
     setUserDetails(row);
