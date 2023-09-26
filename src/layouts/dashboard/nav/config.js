@@ -27,11 +27,11 @@ const navConfig = [
     icon: icon('ic_cart'),
   },
 
-  // {
-  //   title: 'login',
-  //   path: '/login',
-  //   icon: icon('ic_lock'),
-  // },
+  {
+    title: 'Add Assets',
+    path: '/dashboard/add-assets',
+    icon: icon('ic_lock'),
+  },
   // {
   //   title: 'Not found',
   //   path: '/404',

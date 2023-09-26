@@ -9,6 +9,7 @@ import LoginPage from './pages/LoginPage';
 import Page404 from './pages/Page404';
 import BlockUser from './pages/BlockUser';
 import DashboardAppPage from './pages/DashboardAppPage';
+import AddAssets from './pages/AddAssets';
 
 // ----------------------------------------------------------------------
 
@@ -23,6 +24,7 @@ export default function Router() {
         { path: 'all-user', element: <AllUser /> },
         { path: 'block-user', element: <BlockUser /> },
         { path: 'approve-user', element: <ApproveUser /> },
+        { path: 'add-assets', element: <AddAssets /> },
       ],
     },
     {
