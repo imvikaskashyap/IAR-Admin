@@ -83,7 +83,7 @@ const BlockUser = () => {
 
   useEffect(() => {
     axios
-      .get('https://cpdbackend.onrender.com/blocked')
+      .get('https://onegrcirabackend.onrender.com/admin/blocked')
       .then((res) => {
         setTableData(res.data);
       })
@@ -92,7 +92,7 @@ const BlockUser = () => {
 
   useEffect(() => {
     axios
-      .get('https://cpdbackend.onrender.com/approved')
+      .get('https://onegrcirabackend.onrender.com/admin/approved')
       .then((res) => setAllTableData(res.data))
       .catch((err) => console.log(err));
   }, []);
@@ -105,7 +105,7 @@ const BlockUser = () => {
     const confirmed = window.confirm('Are you sure you want to Block this User?');
     if (confirmed) {
       axios
-        .put(`https://cpdbackend.onrender.com/users/blocked/${userId}`)
+        .put(`https://onegrcirabackend.onrender.com/admin/block/${userId}`)
         .then((res) => {
           const updatedUsers = AlltableData.filter((u) => u.userId !== row.userId);
           setShow(true);
@@ -123,7 +123,7 @@ const BlockUser = () => {
     const confirmed = window.confirm('Are you sure you want to Unblock this User?');
     if (confirmed) {
       axios
-        .put(`https://cpdbackend.onrender.com/users/approve/${userId}`)
+        .put(`https://onegrcirabackend.onrender.com/admin/approve/${userId}`)
         .then((res) => {
           const updatedUsers = tableData.filter((u) => u.userId !== row.userId);
           setShow(true);

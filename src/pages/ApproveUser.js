@@ -65,7 +65,7 @@ const ApproveUser = () => {
 
   useEffect(() => {
     axios
-      .get('https://cpdbackend.onrender.com/pending')
+      .get('https://onegrcirabackend.onrender.com/admin/pending')
       .then((res) => {
         setTableData(res.data);
       })
@@ -80,7 +80,7 @@ const ApproveUser = () => {
     const confirmed = window.confirm('Are you sure you want to Reject this User?');
     if (confirmed) {
       axios
-        .delete(`https://cpdbackend.onrender.com/users/${userId}`)
+        .delete(`https://onegrcirabackend.onrender.com/admin/block/${userId}`)
         .then((res) => {
           const updatedUsers = tableData.filter((u) => u.userId !== row.userId);
           setShow(true);
@@ -98,7 +98,7 @@ const ApproveUser = () => {
     const confirmed = window.confirm('Are you sure you want to Approve this User?');
     if (confirmed) {
       axios
-        .put(`https://cpdbackend.onrender.com/users/approve/${userId}`)
+        .put(`https://onegrcirabackend.onrender.com/admin/approve/${userId}`)
         .then((res) => {
           const updatedUsers = tableData.filter((u) => u.userId !== row.userId);
           setShow(true);
