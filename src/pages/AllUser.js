@@ -18,14 +18,14 @@ const AllUser = () => {
       headerName: 'Comp. Location',
       width: 150,
     },
-    {
-      field: 'phone',
-      headerName: 'Phone',
-      width: 150,
-    },
+    // {
+    //   field: 'phone',
+    //   headerName: 'Phone',
+    //   width: 150,
+    // },
     { field: 'status', headerName: 'Status', width: 150 },
-    { field: 'isActive', headerName: 'IsActive', width: 150 },
-    { field: 'createdAt', headerName: 'createdAt', width: 250 },
+    // { field: 'isActive', headerName: 'IsActive', width: 150 },
+    // { field: 'createdAt', headerName: 'createdAt', width: 250 },
   ];
 
   const [paginationModel, setPaginationModel] = React.useState({

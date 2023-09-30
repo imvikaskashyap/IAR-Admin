@@ -10,7 +10,8 @@ import Page404 from './pages/Page404';
 import BlockUser from './pages/BlockUser';
 import DashboardAppPage from './pages/DashboardAppPage';
 import AddAssets from './pages/AddAssets';
-
+import AdminAssets from './pages/AdminAssets';
+import AdminAssetData from './pages/AdminAssetData';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -25,6 +26,9 @@ export default function Router() {
         { path: 'block-user', element: <BlockUser /> },
         { path: 'approve-user', element: <ApproveUser /> },
         { path: 'add-assets', element: <AddAssets /> },
+        { path: 'admin-assets', element: <AdminAssets /> },
+        { path: 'admin-assets-data', element: <AdminAssetData /> },
+
       ],
     },
     {

@@ -32,11 +32,16 @@ const navConfig = [
     path: '/dashboard/add-assets',
     icon: icon('ic_lock'),
   },
-  // {
-  //   title: 'Not found',
-  //   path: '/404',
-  //   icon: icon('ic_disabled'),
-  // },
+  {
+    title: 'Admin Assets',
+    path: '/dashboard/admin-assets',
+    icon: icon('ic_lock'),
+  },
+  {
+    title: 'Admin Assets Data',
+    path: '/dashboard/admin-assets-data',
+    icon: icon('ic_lock'),
+  },
 ];
 
 export default navConfig;
