@@ -64,7 +64,7 @@ const AddAssets = () => {
     formData.append('file', file);
     formData.append('courseName', textReq);
 
-    const baseUrl = 'http://localhost:8000/dropDown/select';
+    const baseUrl = 'https://onegrcirabackend.onrender.com/dropDown/select';
 
     // try {
     //   await axios.post(baseUrl, formData,{

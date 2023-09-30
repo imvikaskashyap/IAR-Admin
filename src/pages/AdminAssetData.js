@@ -9,12 +9,12 @@ const AdminAssetData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = await axios.get("http://localhost:8000/catone/catoneget");
-        const response2 = await axios.get("http://localhost:8000/cattwo/cattwoget");
-        const response3 = await axios.get("http://localhost:8000/catthree/catthreeget");
-        const response4 = await axios.get("http://localhost:8000/catfour/catfourget");
-        const response5 = await axios.get("http://localhost:8000/catfive/catfiveget");
-        const response6 = await axios.get("http://localhost:8000/catsix/catsixget");
+        const response1 = await axios.get("https://onegrcirabackend.onrender.com/catone/catoneget");
+        const response2 = await axios.get("https://onegrcirabackend.onrender.com/cattwo/cattwoget");
+        const response3 = await axios.get("https://onegrcirabackend.onrender.com/catthree/catthreeget");
+        const response4 = await axios.get("https://onegrcirabackend.onrender.com/catfour/catfourget");
+        const response5 = await axios.get("https://onegrcirabackend.onrender.com/catfive/catfiveget");
+        const response6 = await axios.get("https://onegrcirabackend.onrender.com/catsix/catsixget");
 
         // ... fetch data from other APIs
 

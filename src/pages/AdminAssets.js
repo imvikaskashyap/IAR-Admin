@@ -13,7 +13,7 @@ const AdminAssets = () => {
 
   const handleIarCategorySubmit = async () => {
     try {
-      await axios.post('http://localhost:8000/catone/catonesave', { iarCategory });
+      await axios.post('https://onegrcirabackend.onrender.com/catone/catonesave', { iarCategory });
       // Handle success, for example show a success message to the user
       alert("Category Added Proceed to Next")
     } catch (error) {
@@ -23,7 +23,7 @@ const AdminAssets = () => {
 
   const handleAssetCategoriesSubmit = async () => {
     try {
-      await axios.post('http://localhost:8000/cattwo/cattwosave', { assetCategories });
+      await axios.post('https://onegrcirabackend.onrender.com/cattwo/cattwosave', { assetCategories });
       // Handle success
       alert("Category Added Proceed to Next")
     } catch (error) {
@@ -33,7 +33,7 @@ const AdminAssets = () => {
 
   const handleIarCategoryTwoSubmit = async () => {
     try {
-      await axios.post('http://localhost:8000/catthree/catthreesave', { iarCategoryTwo });
+      await axios.post('https://onegrcirabackend.onrender.com/catthree/catthreesave', { iarCategoryTwo });
       // Handle success, for example show a success message to the user
       alert("Category Added Proceed to Next")
     } catch (error) {
@@ -43,7 +43,7 @@ const AdminAssets = () => {
 
   const handleImpactHeadsSubmit = async () => {
     try {
-      await axios.post('http://localhost:8000/catfour/catfoursave', { impactHeads });
+      await axios.post('https://onegrcirabackend.onrender.com/catfour/catfoursave', { impactHeads });
       // Handle success
       alert("Category Added Proceed to Next")
 
@@ -54,7 +54,7 @@ const AdminAssets = () => {
 
   const handleassetsListSubmit = async () => {
     try {
-      await axios.post('http://localhost:8000/catfive/catfivesave', { assetsList });
+      await axios.post('https://onegrcirabackend.onrender.com/catfive/catfivesave', { assetsList });
       // Handle success
       alert("Category Added Proceed to Next")
 
@@ -65,7 +65,7 @@ const AdminAssets = () => {
 
   const handleassetCategorySubmit = async () => {
     try {
-      await axios.post('http://localhost:8000/catsix/catsixsave', { assetCategory });
+      await axios.post('https://onegrcirabackend.onrender.com/catsix/catsixsave', { assetCategory });
       // Handle success
       alert("Final Category Added Click ok To finish")
 
