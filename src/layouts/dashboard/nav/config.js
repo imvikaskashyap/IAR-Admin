@@ -26,6 +26,11 @@ const navConfig = [
     path: '/dashboard/block-user',
     icon: icon('ic_cart'),
   },
+  {
+    title: 'Form Data',
+    path: '/dashboard/form-data',
+    icon: icon('ic_user'),
+  },
 
   {
     title: 'Add Assets',

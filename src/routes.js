@@ -12,6 +12,7 @@ import DashboardAppPage from './pages/DashboardAppPage';
 import AddAssets from './pages/AddAssets';
 import AdminAssets from './pages/AdminAssets';
 import AdminAssetData from './pages/AdminAssetData';
+import FormData from './pages/FormData';
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -28,6 +29,7 @@ export default function Router() {
         { path: 'add-assets', element: <AddAssets /> },
         { path: 'admin-assets', element: <AdminAssets /> },
         { path: 'admin-assets-data', element: <AdminAssetData /> },
+        { path: 'form-data', element: <FormData /> },
 
       ],
     },
