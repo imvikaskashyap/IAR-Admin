@@ -25,26 +25,50 @@ const FormData = () => {
       width: 150,
     },
     { field: 'state', headerName: 'State', width: 150 },
-    // Inside your columns definition
- // Inside your columns definition
-{
-  field: 'fields',
-  headerName: 'Asset list',
-  width: 500,
-  renderCell: (params) => {
-    // Extract and filter the "selectedAssetsList" values from the "fields" array
-    const assetList = params.value
-      .map((field) => field.selectedAssetsList)
-      .filter((value) => value) // Filter out empty values
-      .join(', ');
     
-    return (
-      <div style={{ whiteSpace: 'pre-wrap' }}>
-        {assetList}
-      </div>
-    );
-  },
-},
+    {
+      field: 'fields',
+      headerName: 'Asset list',
+      width: 500,
+      renderCell: (params) => {
+        // Filter out fields with empty "selectedPARTypes," "selectedPARSubTypes," and "particulars" values
+        const filteredFields = params.value.filter(
+          (field) =>
+            field.selectedPARTypes ||
+            field.selectedPARSubTypes ||
+            field.particulars
+        );
+    
+        // Create a string with headings for non-empty fields
+        const assetList = filteredFields
+          .map((field) => {
+            const parts = [];
+    
+            if (field.selectedPARTypes) {
+              parts.push(`PAR Types: ${field.selectedPARTypes}`);
+            }
+            if (field.selectedPARSubTypes) {
+              parts.push(`PAR Subtypes: ${field.selectedPARSubTypes}`);
+            }
+            if (field.particulars) {
+              parts.push(`Particulars: ${field.particulars}`);
+            }
+    
+            return parts.join(', ');
+          })
+          .join(', ');
+    
+        return (
+          <div style={{ whiteSpace: 'pre-wrap' }}>
+            {assetList}
+          </div>
+        );
+      },
+    },
+    
+    
+
+
 
   ];
 

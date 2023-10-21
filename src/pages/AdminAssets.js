@@ -4,6 +4,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
+import Alert from "@mui/material/Alert";
+
 
 import axios from 'axios';
 
@@ -15,6 +17,8 @@ const AdminAssets = () => {
   // const [iarCategoryTwo, setIarCategoryTwo] = useState('');
 
   const [parSelect, setParSelect] = useState('');
+  const [successAlert, setSuccessAlert] = React.useState(null);
+
 
   // const [impactHeads, setImpactHeads] = useState('');
   // const [assetsList, setassetsList] = useState('');
@@ -81,11 +85,24 @@ const AdminAssets = () => {
   const handleIarCategorySubmit = async () => {
     try {
       await axios.post('https://onegrcirabackend.onrender.com/catone/catonesave', { parTypes });
-
+      setSuccessAlert(
+        <Alert severity="success" onClose={handleCloseSuccessAlert}>
+          Submission was successful!
+        </Alert>
+      );
+      setTimeout(() => {
+        window.location.reload(); // This will reload the page
+      }, 3000); 
       // Handle success, for example show a success message to the user
-      alert('Category Added Proceed to Next');
+      // alert('Category Added Proceed to Next');
     } catch (error) {
       // Handle error, show an error message to the user
+     
+      setSuccessAlert(
+        <Alert severity="error" onClose={handleCloseSuccessAlert}>
+          Getting this error - {error.message}
+        </Alert>
+      );
     }
   };
 
@@ -96,12 +113,30 @@ const AdminAssets = () => {
         parSelect,
       });
       // Handle success
-      alert('Category Added Proceed to Next');
+      // alert('Category Added Proceed to Next');
+      setSuccessAlert(
+        <Alert severity="success" onClose={handleCloseSuccessAlert}>
+          Submission was successful!
+        </Alert>
+        
+      );
+
+      setTimeout(() => {
+        window.location.reload(); // This will reload the page
+      }, 3000); 
     } catch (error) {
       // Handle error
+      setSuccessAlert(
+        <Alert severity="error" onClose={handleCloseSuccessAlert}>
+          Getting this error - {error.message}
+        </Alert>
+      );
     }
   };
-
+  const handleCloseSuccessAlert = () => {
+    setSuccessAlert(null);
+  };
+  
   // const handleIarCategoryTwoSubmit = async () => {
   //   try {
   //     await axios.post('https://onegrcirabackend.onrender.com/catthree/catthreesave', { parTypes: iarCategoryTwo });
@@ -167,6 +202,8 @@ const AdminAssets = () => {
 
   return (
     <>
+    {successAlert}
+
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
         <div style={{}}>
           <TextField
@@ -183,14 +220,21 @@ const AdminAssets = () => {
           </Button>
         </div>
         <div style={{}}>
-          {/* <InputLabel sx={{ fontSize: '15px', textAlign: 'center' }}>PAR Types</InputLabel> */}
-          <FormControl variant="standard" sx={{ minWidth: '100%', maxWidth: '200px' }}>
+          <FormControl 
+            sx={{ ml: 5, mt: 1,}}
+          
+          >
+            <InputLabel id="demo-simple-select-label">PAR Select</InputLabel>
             <Select
-              // style={{ fontSize: '15px', width: '220px' }}
-              sx={{ ml: 5, mt: 2.5, textAlign: 'center' }}
+              style={{ fontSize: '15px', width: '220px' }}
+              // sx={{ ml: 5, mt: 2.5, textAlign: 'center' }}
               // value={row.selectedPARTypes}
               value={parSelect}
               // label="Par Types"
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Par Sub Types"
+              variant="outlined"
               onChange={(event) => {
                 setParSelect(event.target.value);
                 // handleChange(event, row.id, "selectedPARTypes");

@@ -6,30 +6,26 @@ const AdminAssetData = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const apiEndpoints = [
+    "https://onegrcirabackend.onrender.com/catone/catoneget",
+    "https://onegrcirabackend.onrender.com/cattwo/cattwoget",
+    "https://onegrcirabackend.onrender.com/catthree/catthreeget",
+    "https://onegrcirabackend.onrender.com/catfour/catfourget",
+    "https://onegrcirabackend.onrender.com/catfive/catfiveget",
+    "https://onegrcirabackend.onrender.com/catsix/catsixget",
+  ];
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = await axios.get("https://onegrcirabackend.onrender.com/catone/catoneget");
-        const response2 = await axios.get("https://onegrcirabackend.onrender.com/cattwo/cattwoget");
-        const response3 = await axios.get("https://onegrcirabackend.onrender.com/catthree/catthreeget");
-        const response4 = await axios.get("https://onegrcirabackend.onrender.com/catfour/catfourget");
-        const response5 = await axios.get("https://onegrcirabackend.onrender.com/catfive/catfiveget");
-        const response6 = await axios.get("https://onegrcirabackend.onrender.com/catsix/catsixget");
+        const responses = await Promise.all(
+          apiEndpoints.map(async (endpoint) => {
+            const response = await axios.get(endpoint);
+            return response.data;
+          })
+        );
 
-        // ... fetch data from other APIs
-
-        // Organize and merge data from different APIs into a single array
-        const mergedData = [
-          ...response1.data,
-          ...response2.data,
-          ...response3.data,
-          ...response4.data,
-          ...response5.data,
-          ...response6.data,
-          // ... data from other APIs
-        ];
-
-        setData(mergedData);
+        setData(responses);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -49,30 +45,26 @@ const AdminAssetData = () => {
 
   return (
     <div>
-      <table>
-        <thead>
-          <tr>
-            <th>IAR Category</th>
-            <th>Asset Categories</th>
-            <th>IAR Category Two</th>
-            <th>Impact Heads</th>
-            <th>Assets List</th>
-            <th>Asset Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.iarCategory}</td>
-              <td>{item.assetCategories ? item.assetCategories : "-"}</td>
-              <td>{item.iarCategoryTwo}</td>
-              <td>{item.impactHeads ? item.impactHeads : "-"}</td>
-              <td>{item.assetsList ? item.assetsList : "-"}</td>
-              <td>{item.assetCategory ? item.assetCategory : "-"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {data.map((apiData, index) => (
+        <div key={index}>
+          <h3>Table {index + 1}</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>IAR Category</th>
+              </tr>
+            </thead>
+            <tbody>
+              {apiData.map((item, itemIndex) => (
+                <tr key={itemIndex}>
+                  <td>{item.iarCategory}</td>
+                
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))}
     </div>
   );
 };
